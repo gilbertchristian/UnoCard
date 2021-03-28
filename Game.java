@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 import java.util.Scanner;
-
+import java.util.Collections;
 import javax.smartcardio.Card;
 
 //source : https://www.youtube.com/playlist?list=PLu_zq6omCvuQ_ZoKnE8-CE2nF113p9pxd
@@ -47,8 +47,9 @@ public class Game {
         for (int i = 0; i < player.length; i++){
             System.out.println("Player" + (i+1) + ": " + allPlayers[i]);
         }
-
-        Cards tableCard = new Cards(/*random.color, random.value*/);
+        
+        //shuffle dari list of color dan value
+        Cards tableCard = new Cards(Collections.shuffle(Color), Collections.shuffle(Value));
 
     }
 
@@ -81,8 +82,8 @@ public class Game {
                 }
                 switch(card.getValue()) {
                     case "Normal":
-                        //continue
-                        //nextplayer
+                        discardCard(card);
+                        nextPlayer();
                     case "Wild":
                         //continue
                         //nextplayer
@@ -114,11 +115,12 @@ public class Game {
     }
 
     public void discardCard (Cards card){
-        for (int i = 0; i < getPlayerCardSize(currentPlayer); i++)
+        for (int i = 0; i < getPlayerCardSize(currentPlayer); i++){
             if (getPlayerCardId(currentPlayer, i).getValue() == card.getValue()){
                 cardPile.add(card);
-                removePlayerCard(currentPlayer, i);
+                allPlayerCards.get(currentPlayer).remove(i);
             }
+        }
     }
 
     public int getPlayerCardSize(int player_id){
@@ -129,8 +131,7 @@ public class Game {
         return allPlayerCards.get(player_id).get(card_id);
     }
 
-    public void removePlayerCard(int player_id, int card_id){
-        allPlayerCards.get(player_id).remove(card_id);
+    public void nextPlayer(){
+        currentPlayer += 1 % allPlayers.length;
     }
-
 }
