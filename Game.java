@@ -13,7 +13,7 @@ public class Game {
     
     //variable Cards tergantung variable di class card.java
     private ArrayList<ArrayList<Cards>> allPlayerCards //List semua kartu pemain
-    private ArrayList<Cards> playerCards //List kartu tiap player
+    private ArrayList<Cards> cardPile //List tumpukkan kartu buat discard-an
 
     boolean gameDirection; //clockwise = true, anticlockwise = false
     
@@ -24,9 +24,9 @@ public class Game {
         gameDirection = true;
 
         allPlayerCards = new ArrayList<ArrayList<Cards>>(); 
-        playerCards = new ArrayList<Cards>();
+        cardPile = new ArrayList<Cards>();
 
-        for (int i = 0; i < player.length; i++){
+        for (int i = 0; /*i < num_of_player*/; i++){ //ngisi kartu
             ArrayList<Cards> cardInHand = new ArrayList<Cards>(/*random 7 kartu*/);
             allPlayersCards.add(cardInHand); //array 7 kartu dimasukin ke array 
         }
@@ -53,17 +53,17 @@ public class Game {
     }
 
     public void ListsCard(int currentPlayer){ //F02
-        for (int i = 0; i < playerCards.size(); i++){
-            System.out.println((i+1) + ". " + allPlayerCards.get(currentPlayer).get(i));
+        for (int i = 0; i < getPlayerCardSize(currentPlayer); i++){
+            System.out.println((i+1) + ". " + getPlayerCardId(currentPlayer, i));
         }
     }
 
     public void Discard(Cards card){ //F03
         if (card.getColor() == tableCard.getColor() || card.getValue() == tableCard.getValue()){ //kalau kartu cocok
             //discard
-            if (allPlayerCards.get(currentPlayer).size() == 0){ //kalau kartu habis
+            if (getPlayerCardSize(currentPlayer) == 0){ //kalau kartu habis
                  System.out.println("Congratulation " + allPlayers[currentPlayer + 1] + "! You're the winner of this round."); 
-            }else if (allPlayerCards.get(currentPlayer).size() == 1){
+            }else if (getPlayerCardSize(currentPlayer) == 1){
                 if (declareHiji) {
                     //continue
                     //nextplayer
@@ -79,7 +79,6 @@ public class Game {
                     //continue
                     //nextplayer
                 }
-
                 switch(card.getValue()) {
                     case "Normal":
                         //continue
@@ -108,15 +107,30 @@ public class Game {
                         //draw4
                         //nextplayer
                 }
-
             } 
         }else{
             //draw 2
         }
     }
 
-    public void discardCard (int i){
-        ArrayList<Cards>
+    public void discardCard (Cards card){
+        for (int i = 0; i < getPlayerCardSize(currentPlayer); i++)
+            if (getPlayerCardId(currentPlayer, i).getValue() == card.getValue()){
+                cardPile.add(card);
+                removePlayerCard(currentPlayer, i);
+            }
+    }
+
+    public int getPlayerCardSize(int player_id){
+        return allPlayerCards.get(player_id).size();
+    }
+
+    public int getPlayerCardId(int player_id, int card_id){
+        return allPlayerCards.get(player_id).get(card_id);
+    }
+
+    public void removePlayerCard(int player_id, int card_id){
+        allPlayerCards.get(player_id).remove(card_id);
     }
 
 }
