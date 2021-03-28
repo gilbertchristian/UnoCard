@@ -1,0 +1,122 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
+import javax.smartcardio.Card;
+
+//source : https://www.youtube.com/playlist?list=PLu_zq6omCvuQ_ZoKnE8-CE2nF113p9pxd
+
+public class Game {
+    private int currentPlayer;
+    private String[] allPlayers;
+    private Cards tableCard; //ga yakin
+    private boolean declareHiji; //ga yakin
+    
+    //variable Cards tergantung variable di class card.java
+    private ArrayList<ArrayList<Cards>> allPlayerCards //List semua kartu pemain
+    private ArrayList<Cards> playerCards //List kartu tiap player
+
+    boolean gameDirection; //clockwise = true, anticlockwise = false
+    
+    public Game(String[] player){
+        //belom ada queue player + random firstplayer
+        allPlayers = player;
+        currentPlayer = 0;
+        gameDirection = true;
+
+        allPlayerCards = new ArrayList<ArrayList<Cards>>(); 
+        playerCards = new ArrayList<Cards>();
+
+        for (int i = 0; i < player.length; i++){
+            ArrayList<Cards> cardInHand = new ArrayList<Cards>(/*random 7 kartu*/);
+            allPlayersCards.add(cardInHand); //array 7 kartu dimasukin ke array 
+        }
+    }
+
+    public void StartGame(Game game){ //F01
+        System.out.println("COMMANDS: ");
+        System.out.println("F01: Start Game");
+        System.out.println("F02: List Cards");
+        System.out.println("F03: Discard");
+        System.out.println("F04: Draw");
+        System.out.println("F05: Declare HIJI");
+        System.out.println("F06: List Players");
+        System.out.println("F07: View Player in Turn");
+        System.out.println("F08: Help");
+        System.out.println("");
+
+        for (int i = 0; i < player.length; i++){
+            System.out.println("Player" + (i+1) + ": " + allPlayers[i]);
+        }
+
+        Cards tableCard = new Cards(/*random.color, random.value*/);
+
+    }
+
+    public void ListsCard(int currentPlayer){ //F02
+        for (int i = 0; i < playerCards.size(); i++){
+            System.out.println((i+1) + ". " + allPlayerCards.get(currentPlayer).get(i));
+        }
+    }
+
+    public void Discard(Cards card){ //F03
+        if (card.getColor() == tableCard.getColor() || card.getValue() == tableCard.getValue()){ //kalau kartu cocok
+            //discard
+            if (allPlayerCards.get(currentPlayer).size() == 0){ //kalau kartu habis
+                 System.out.println("Congratulation " + allPlayers[currentPlayer + 1] + "! You're the winner of this round."); 
+            }else if (allPlayerCards.get(currentPlayer).size() == 1){
+                if (declareHiji) {
+                    //continue
+                    //nextplayer
+                }else{
+                    //draw 2
+                    //nextplayer
+                }
+            }else{
+                if (declareHiji) {
+                    //draw 2
+                    //nextplayer
+                }else{
+                    //continue
+                    //nextplayer
+                }
+
+                switch(card.getValue()) {
+                    case "Normal":
+                        //continue
+                        //nextplayer
+                    case "Wild":
+                        //continue
+                        //nextplayer
+                    case "Reverse":
+                        gameDirection ^= true; //XOR, kalau true jadi false, kalau false jadi true
+                        currentPlayer = allPlayers.length - 1;
+                        //nextplayer
+                    case "Skip":
+                        //belom yakin itungannya
+                        if (gameDirection){
+                            System.out.println(allPlayers[currentPlayer + 1] + " has been skipped.");
+                            currentPlayer = (currentPlayer + 1) % allPlayers.length; 
+                        }else{
+                            System.out.println(allPlayers[currentPlayer - 1] + " has been skipped."); 
+                            currentPlayer = (currentPlayer - 1) % allPlayers.length; 
+                        }
+                        //nextplayer
+                    case "Draw 2":
+                        //draw2
+                        //nextplayer
+                    case "Draw 4":
+                        //draw4
+                        //nextplayer
+                }
+
+            } 
+        }else{
+            //draw 2
+        }
+    }
+
+    public void discardCard (int i){
+        ArrayList<Cards>
+    }
+
+}
