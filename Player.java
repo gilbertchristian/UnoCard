@@ -3,6 +3,7 @@
  * player ketika dibuat pasti memiliki nama dan kartu serta urutan main
  * listCards untuk mengetahui kartu yang dimiliki player
  */
+
 import java.util.ArrayList;
 import java.util.*;
 public class Player{
@@ -37,12 +38,16 @@ public class Player{
     }
     
     public viewPlayerinTurn(){
-        //ini bingung di main dishufflenya gimana
+        // bingung di main dishufflenya gimana
     }
 
     public listPlayer(){
-        //ini bingung di main dishufflenya gimana
-
+        // bingung di main dishufflenya gimana
+        for (int i = 0; i < totalPlayer; i++){
+            System.out.println("Pemain " + (i + 1) + ": " + listurutan.get(0));
+            System.out.println("Jumlah Kartu: " + player.jumlahKartu());
+            System.out.println(player.status); //Sedang giliran/Tidak sedang giliran
+        }
     }
     
 }
