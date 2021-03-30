@@ -134,4 +134,16 @@ public class Game {
     public void nextPlayer(){
         currentPlayer += 1 % allPlayers.length;
     }
+
+    public void listPlayers(ArrayList<Player> player){ //F06
+        for (i=0; i<player.size(); i++){
+            System.out.println("Pemain "+ (i+1) +": "+ player[i].name)
+            System.out.println("Jumlah Kartu: "+ player[i].ListsCard.size())
+            if(currentPlayer(player) == player[i]){  //nama method blom bener
+                System.out.println("Sedang giliran");
+            }else {
+                System.out.println("Tidak sedang giliran");
+            }
+        }
+    }
 }
