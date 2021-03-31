@@ -1,5 +1,3 @@
-package HijiCard;
-
 public class HijiCard{
     enum Color{
         Red, Blue, Green, Yellow, Wild, values;
@@ -33,8 +31,5 @@ public class HijiCard{
     }
     public String toString(){
         return color + "_" + value;
-    }
-    public static void main(String[] args) {
-        
     }
 }
