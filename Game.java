@@ -68,31 +68,31 @@ public class Game {
         input.close();
     }
 
-    public void StartGame(Game game){ //F01
-        System.out.println("COMMANDS: ");
-        System.out.println("F01: Start Game");
-        System.out.println("F02: List Cards");
-        System.out.println("F03: Discard");
-        System.out.println("F04: Draw");
-        System.out.println("F05: Declare HIJI");
-        System.out.println("F06: List Players");
-        System.out.println("F07: View Player in Turn");
-        System.out.println("F08: Help");
-        System.out.println("");
+    // public void StartGame(Game game){ //F01
+    //     System.out.println("COMMANDS: ");
+    //     System.out.println("F01: Start Game");
+    //     System.out.println("F02: List Cards");
+    //     System.out.println("F03: Discard");
+    //     System.out.println("F04: Draw");
+    //     System.out.println("F05: Declare HIJI");
+    //     System.out.println("F06: List Players");
+    //     System.out.println("F07: View Player in Turn");
+    //     System.out.println("F08: Help");
+    //     System.out.println("");
 
-        for (int i = 0; i < player.length; i++){
-            System.out.println("Player" + (i+1) + ": " + allPlayers[i]);
-        }
+    //     for (int i = 0; i < player.length; i++){
+    //         System.out.println("Player" + (i+1) + ": " + allPlayers[i]);
+    //     }
         
-        //shuffle dari list of color dan value
-        Cards tableCard = new Cards(Collections.shuffle(Color), Collections.shuffle(Value));
-        //tableCard masukin ke cardPile
+    //     //shuffle dari list of color dan value
+    //     Cards tableCard = new Cards(Collections.shuffle(Color), Collections.shuffle(Value));
+    //     //tableCard masukin ke cardPile
 
-    }
+    // }
 
     public void ListsCard(int currentPlayer){ //F02
         for (int i = 0; i < getPlayerCardSize(currentPlayer); i++){
-            System.out.println((i+1) + ". " + getPlayerCardId(currentPlayer, i));
+            System.out.println((i+1) + ". " + getPlayerCardId(currentPlayer, i).toString());
         }
     }
 
@@ -166,11 +166,11 @@ public class Game {
     }
 
     public int getPlayerCardSize(int player_id){ //getter
-        return allPlayerCards.get(player_id).size();
+        return players.get(player_id).jumlahKartu();
     }
 
-    public int getPlayerCardId(int player_id, int card_id){ //getter 
-        return allPlayerCards.get(player_id).get(card_id);
+    public Card getPlayerCardId(int player_id, int card_id){ //getter 
+        return players.get(player_id).currentKartu(card_id);
     }
 
     public void nextPlayer(){

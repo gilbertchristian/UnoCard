@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.*;
 public class Player{
     public String name;
-    private ArrayList<Card> hand; //Kartu yang dimiliki masing2 player
+    public ArrayList<Card> hand; //Kartu yang dimiliki masing2 player
 
     public Player(String name){
         this.name = name; 
@@ -35,6 +35,10 @@ public class Player{
     public int jumlahKartu(){
         return hand.size();
         //Untuk dicek pas Declare HIJI
+    }
+
+    public Card currentKartu(int a){
+        return hand.get(a);
     }
     
     public viewPlayerinTurn(){

@@ -30,6 +30,5 @@ public class Card{
         return this.value;
     }
     public String toString(){
-        return color + "_" + value;
-    }
+        return value + " " + color;
 }
