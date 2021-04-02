@@ -112,13 +112,13 @@ public class Game {
                     //nextplayer
                 }else{
                     //draw 2
-                    drawtwocards(currentPlayer);
+                    drawTwo(currentPlayer);
                     //nextplayer
                 }
             }else{
                 if (declareHiji) {
                     //draw 2
-                    drawtwocards(currentPlayer);
+                    drawTwo(currentPlayer);
                     //nextplayer
                 }else{
                     //continue
@@ -147,16 +147,17 @@ public class Game {
                         //nextplayer
                     case "Draw 2":
                         //draw2
-                        drawtwocards(currentPlayer);
+                        drawTwo(currentPlayer);
                         //nextplayer
                     case "Draw 4":
                         //draw4
-                        drawfourcards(currentPlayer);
+                        drawFour(currentPlayer);
                         //nextplayer
                 }
             } 
         }else{
             //draw 2
+            drawTwo(currentPlayer);
         }
     }
 
@@ -193,24 +194,28 @@ public class Game {
         }
     }
 
-    private void drawtwocards(Player player){
-        drawCards(player, 2);
-    }
-
-    private void drawfourcards(Player player){
-        drawCards(player, 4);
-    }
-
-    private List<Card> drawCards(Player player, int numberofdraw){
-        int num = Math.num(numberofcard, cardPile.getSize());
-        var drawnCards = new ArrayList<Card>();
-    
-        for (int i = 0; i < num; i++){
-            var drawnCard = cardPile.drawCard();
-            drawnCards.add(drawnCard);
-    
-            player.addToHandCards(drawnCard);
-        }
+    public void draw(int currentPlayer, int numofdrawcard){
+        String card;
         
+        //loop
+        for (int i = 0; i < numofdrawcard; i++){
+            //random draw
+            card = namalistcard[ran.nextInt(namalistcard.length)];
+        
+            //masukin ke tangan
+            listCard.add(card);
+        }
+
     }
+    
+    //buat draw 4
+    public void drawFour(int currentPlayer){
+        draw(player, 4);
+    }
+    
+    //buat draw 2
+    public void drawTwo(int currentPlayer){
+        draw(player, 2);
+    }
+
 }
