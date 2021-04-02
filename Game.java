@@ -96,12 +96,16 @@ public class Game {
         }
     }
 
-    public void Discard(Cards card){ //F03
+    public void initCard(){
+        Card tableCard = new Card(color, value);
+    }
+
+    public void Discard(Card card){ //F03
         //tableCard ganti jadi cardPile tapi getTop nya aja, tapi bingung
         if (card.getColor() == tableCard.getColor() || card.getValue() == tableCard.getValue()){ //kalau kartu cocok
             //discard
             if (getPlayerCardSize(currentPlayer) == 0){ //kalau kartu habis
-                 System.out.println("Congratulation " + allPlayers[currentPlayer + 1] + "! You're the winner of this round."); 
+                 System.out.println("Congratulation " + players.get(currentPlayer).name + "! You're the winner of this round."); 
             }else if (getPlayerCardSize(currentPlayer) == 1){
                 if (declareHiji) {
                     //continue
