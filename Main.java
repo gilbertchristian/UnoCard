@@ -1,8 +1,15 @@
+import java.util.Scanner;
+
 public class Main {
+    private static boolean playing;
+
     public static void main(String[] args) {
-        if(args.length > 0){
-            switch(args[0]){
-                case "View Player in Turn"
+        Scanner input = new Scanner(System.in);
+        while (playing){
+            String command = input.nextLine();     
+
+            switch(command){
+                case "View Player in Turn" :
                     
                     break;
                 case "Help":
@@ -20,20 +27,20 @@ public class Main {
                     System.out.println("- Apabila kartu yang diambil tidak bisa dikeluarkan, maka giliran permainan akan dilanjutkan ke pemain selanjutnya.");
                     System.out.println("");
                     System.out.println("Jenis Kartu ");
-                    System.out.println("- Angka 0-9 	→ Kartu biasa yang dikeluarkan berdasarkan warnanya.");
-                    System.out.println("- Draw 2 	→ Pemain selanjutnya mengambil 2 kartu. Apabila pemain tersebut mengeluarkan Draw 2 juga, maka pemain selanjutnya mengambil 4 kartu, dan seterusnya.");
-                    System.out.println("- Draw 4 	→ Pemain selanjutnya mengambil 4 kartu. Pemain yang mengeluarkan kartu Draw 4 dapat memilih warna yang dimainkan selanjutnya.");
-                    System.out.println("- Wildcard 	→ Pemain memilih warna yang dapat dikeluarkan pemain selanjutnya.");
-                    System.out.println("- Reverse 	→ Urutan giliran pemain dibalik.");
-                    System.out.println("- Skip 		→ Giliran pemain selanjutnya dilewati.");
+                    System.out.println("- Angka 0-9 → Kartu biasa yang dikeluarkan berdasarkan warnanya.");
+                    System.out.println("- Draw 2    → Pemain selanjutnya mengambil 2 kartu. Apabila pemain tersebut mengeluarkan Draw 2 juga, maka pemain selanjutnya mengambil 4 kartu, dan seterusnya.");
+                    System.out.println("- Draw 4    → Pemain selanjutnya mengambil 4 kartu. Pemain yang mengeluarkan kartu Draw 4 dapat memilih warna yang dimainkan selanjutnya.");
+                    System.out.println("- Wildcard  → Pemain memilih warna yang dapat dikeluarkan pemain selanjutnya.");
+                    System.out.println("- Reverse   → Urutan giliran pemain dibalik.");
+                    System.out.println("- Skip      → Giliran pemain selanjutnya dilewati.");
                     System.out.println("");
                     System.out.println("Multiple Discard");
                     System.out.println("Pemain dapat mengeluarkan lebih dari 1 kartu bila terdapat kartu dengan jenis yang sama.");
-                    System.out.println("- Draw 2	→ pemain selanjutnya mengambil kartu sebanyak 2 kali jumlah kartu yang dikeluarkan.");
-                    System.out.println("- Draw 4	→ pemain selanjutnya mengambil kartu sebanyak 4 kali jumlah kartu yang dikeluarkan. Pemain yang mengeluarkan hanya dapat memilih satu warna.");
-                    System.out.println("- Skip		→ jumlah pemain yang dilewati sebanyak jumlah kartu yang dikeluarkan.");
-                    System.out.println("- Reverse	→ urutan pemain dibalik sebanyak kartu yang dikeluarkan.");
-                    System.out.println("- Wildcard	→ pemain hanya dapat memilih satu warna.");
+                    System.out.println("- Draw 2    → pemain selanjutnya mengambil kartu sebanyak 2 kali jumlah kartu yang dikeluarkan.");
+                    System.out.println("- Draw 4    → pemain selanjutnya mengambil kartu sebanyak 4 kali jumlah kartu yang dikeluarkan. Pemain yang mengeluarkan hanya dapat memilih satu warna.");
+                    System.out.println("- Skip      → jumlah pemain yang dilewati sebanyak jumlah kartu yang dikeluarkan.");
+                    System.out.println("- Reverse   → urutan pemain dibalik sebanyak kartu yang dikeluarkan.");
+                    System.out.println("- Wildcard  → pemain hanya dapat memilih satu warna.");
                     System.out.println("");
                     break;
                 case "Menu":
@@ -52,6 +59,7 @@ public class Main {
                     // tampilkan ucapan argumen tidak dikenali
                     System.out.println("Menu tidak ada, silahkan ketik 'Menu' untuk bantuan");
             }
-        }  
+        }
+        input.close();  
     }
 }

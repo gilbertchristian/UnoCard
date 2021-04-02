@@ -17,7 +17,7 @@ public class Player{
     
     //Asumsi: Urutan pemain di main program lengkap dengan shufflenya
 
-    public ArrayList<Card> listCards(String name){
+    public ArrayList<Card> listCards (String name){
         for (int i = 0; i < hand.size(); i++){
             System.out.println((i + 1) + ". " + hand.get(i));
         } 
