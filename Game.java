@@ -59,7 +59,7 @@ public class Game {
 
     public void listCard(){ //F02
         for (int i = 0; i < getPlayerCardSize(currentPlayer); i++){
-            System.out.println((i+1) + ". " + getPlayerCardId(currentPlayer, i).toString());
+            System.out.println((i+1) + ". " + getPlayerCard(currentPlayer, i).toString());
         }
     }
 
@@ -159,7 +159,7 @@ public class Game {
         return players.get(player_id).jumlahKartu();
     }
 
-    public Card getPlayerCardId(int player_id, int card_id){
+    public Card getPlayerCard(int player_id, int card_id){
         return players.get(player_id).currentKartu(card_id);
     }
 

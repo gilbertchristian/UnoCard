@@ -39,8 +39,8 @@ public class Player{
         //Untuk dicek pas Declare HIJI
     }
 
-    public Card currentKartu(int a){
-        return hand.get(a);
+    public Card currentcard(int id){
+        return hand.get(id);
     }
     
     public viewPlayerinTurn(){
