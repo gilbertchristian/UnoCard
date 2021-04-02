@@ -50,6 +50,7 @@ public class Game {
         
         //shuffle dari list of color dan value
         Cards tableCard = new Cards(Collections.shuffle(Color), Collections.shuffle(Value));
+        //tableCard masukin ke cardPile
 
     }
 
@@ -60,6 +61,7 @@ public class Game {
     }
 
     public void Discard(Cards card){ //F03
+        //tableCard ganti jadi cardPile tapi getTop nya aja, tapi bingung
         if (card.getColor() == tableCard.getColor() || card.getValue() == tableCard.getValue()){ //kalau kartu cocok
             //discard
             if (getPlayerCardSize(currentPlayer) == 0){ //kalau kartu habis
@@ -123,11 +125,11 @@ public class Game {
         }
     }
 
-    public int getPlayerCardSize(int player_id){
+    public int getPlayerCardSize(int player_id){ //getter
         return allPlayerCards.get(player_id).size();
     }
 
-    public int getPlayerCardId(int player_id, int card_id){
+    public int getPlayerCardId(int player_id, int card_id){ //getter 
         return allPlayerCards.get(player_id).get(card_id);
     }
 
