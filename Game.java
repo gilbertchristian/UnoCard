@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 import java.util.Collections;
 import javax.smartcardio.Card;
@@ -72,11 +73,13 @@ public class Game {
                     //nextplayer
                 }else{
                     //draw 2
+                    drawtwocards(currentPlayer);
                     //nextplayer
                 }
             }else{
                 if (declareHiji) {
                     //draw 2
+                    drawtwocards(currentPlayer);
                     //nextplayer
                 }else{
                     //continue
@@ -105,9 +108,11 @@ public class Game {
                         //nextplayer
                     case "Draw 2":
                         //draw2
+                        drawtwocards(currentPlayer);
                         //nextplayer
                     case "Draw 4":
                         //draw4
+                        drawfourcards(currentPlayer);
                         //nextplayer
                 }
             } 
@@ -147,5 +152,26 @@ public class Game {
                 System.out.println("Tidak sedang giliran");
             }
         }
+    }
+
+    private void drawtwocards(Player player){
+        drawCards(player, 2);
+    }
+
+    private void drawfourcards(Player player){
+        drawCards(player, 4);
+    }
+
+    private List<Card> drawCards(Player player, int numberofdraw){
+        int num = Math.num(numberofcard, cardPile.getSize());
+        var drawnCards = new ArrayList<Card>();
+    
+        for (int i = 0; i < num; i++){
+            var drawnCard = cardPile.drawCard();
+            drawnCards.add(drawnCard);
+    
+            player.addToHandCards(drawnCard);
+        }
+        
     }
 }
