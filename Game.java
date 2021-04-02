@@ -1,3 +1,5 @@
+//package UnoCard;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -7,12 +9,11 @@ import java.util.Random;
 //source : https://www.youtube.com/playlist?list=PLu_zq6omCvuQ_ZoKnE8-CE2nF113p9pxd
 
 public class Game {
-    private int currentPlayer;
+    public int currentPlayer;
     //private String[] allPlayers;
     private Card tableCard; //ga yakin
     private boolean declareHiji; //ga yakin
     
-    //variable Cards tergantung variable di class card.java
     private ArrayList<Player> players; //List  pemain
     private ArrayList<Card> cardPile; //List tumpukkan kartu buat discard-an
 
@@ -23,7 +24,7 @@ public class Game {
     private String[] temp;
 
     //random
-    //Random ran = new Random();
+    Random ran = new Random();
 
     public void initGame (){
         // JUMLAH PEMAIN
@@ -56,7 +57,7 @@ public class Game {
         input.close();
     }
 
-    public void ListsCard(int currentPlayer){ //F02
+    public void listCard(){ //F02
         for (int i = 0; i < getPlayerCardSize(currentPlayer); i++){
             System.out.println((i+1) + ". " + getPlayerCardId(currentPlayer, i).toString());
         }
@@ -84,7 +85,7 @@ public class Game {
         return getPlayerCardSize(currentPlayer) == 1;
     }
 
-    public void Discard(Card card){ //F03
+    public void discard(Card card){ //F03
         //DISCARDNYA VALID
         if (validDiscard(card)){
             cardPile.add(card);
@@ -92,7 +93,7 @@ public class Game {
         
             //KARTU ABIS
             if (emptyHand(currentPlayer)){
-                 System.out.println("Congratulation " + players.get(currentPlayer).name + "! You're the winner of this round."); 
+                 System.out.println("Congratulation " + getPlayerName(currentPlayer) + "! You're the winner of this round."); 
             }
             //KARTU TINGGAL SATU
             if (isOneCardLeft(currentPlayer)){ 
@@ -114,66 +115,77 @@ public class Game {
                 //     //nextplayer
                 // }
             }
-            switch(card.getValue()) {
+            switch(card.getValue().name()) { //ENUM TO STRING
                 case "Normal":
-                    nextPlayer();
+                    nextPlayer(1);
                 case "Wild":
-                    //continue
-                    //nextplayer
+                    //milih warna
+                    nextPlayer(1);
                 case "Reverse":
                     gameDirection ^= true; //XOR, kalau true jadi false, kalau false jadi true
-                    currentPlayer = allPlayers.length - 1;
-                    //nextplayer
-                case "Skip":
-                     //belom yakin itungannya
-                    if (gameDirection){
-                        System.out.println(allPlayers[currentPlayer + 1] + " has been skipped.");
-                        currentPlayer = (currentPlayer + 1) % allPlayers.length; 
+                    if (gameDirection == true){
+                        nextPlayer(1);
                     }else{
-                        System.out.println(allPlayers[currentPlayer - 1] + " has been skipped."); 
-                        currentPlayer = (currentPlayer - 1) % allPlayers.length; 
+                        prevPlayer(1);
                     }
-                    //nextplayer
+                case "Skip":
+                    if (gameDirection == true){
+                        System.out.println(players.get(currentPlayer) + " has been skipped.");
+                        nextPlayer(2);
+                    }else{
+                        System.out.println(players.get(currentPlayer) + " has been skipped."); 
+                        prevPlayer(2);
+                    }
                 case "Draw 2":
                     //draw2
                     drawTwo(currentPlayer);
-                    //nextplayer
+                    nextPlayer(1);
                 case "Draw 4":
                     //draw4
                     drawFour(currentPlayer);
-                    //nextplayer
-                }
-            
+                    nextPlayer(1);
+                }   
         }else{
             //draw 1
-            //rekursif tapi cuma bisa sekali
-            
+            //rekursif tapi cuma bisa sekali 
         }
     }
 
+    public String getPlayerName(int player_id){
+        return players.get(player_id).name;
+    }
 
-    public int getPlayerCardSize(int player_id){ //getter
+    public int getPlayerCardSize(int player_id){
         return players.get(player_id).jumlahKartu();
     }
 
-    public Card getPlayerCardId(int player_id, int card_id){ //getter 
+    public Card getPlayerCardId(int player_id, int card_id){
         return players.get(player_id).currentKartu(card_id);
     }
 
-    public void nextPlayer(){
-        currentPlayer += 1 % allPlayers.length;
+    public void nextPlayer(int num){
+        currentPlayer = currentPlayer + num % players.size();
     }
 
-    public void listPlayers(ArrayList<Player> player){ //F06
-        for (i=0; i<player.size(); i++){
-            System.out.println("Pemain "+ (i+1) +": "+ player[i].name)
-            System.out.println("Jumlah Kartu: "+ player[i].ListsCard.size())
-            if(currentPlayer(player) == player[i]){  //nama method blom bener
+    public void prevPlayer(int num){
+        currentPlayer = currentPlayer - num % players.size();
+    }
+
+    public void listPlayers(){ //F06
+        for (int i = 0; i < players.size(); i++){
+            System.out.println("Pemain "+ (i+1) +": "+ getPlayerName(i));
+            System.out.println("Jumlah Kartu: "+ getPlayerCardSize(i));
+            if(currentPlayer == i){
                 System.out.println("Sedang giliran");
             }else {
                 System.out.println("Tidak sedang giliran");
             }
         }
+    }
+
+    public void viewPlayerinTurn (){ //F07
+        System.out.println("Sedang giliran: " + getPlayerName(currentPlayer));
+        System.out.println("Giliran selanjutnya: " + getPlayerName(currentPlayer + 1));
     }
 
     public void draw(int currentPlayer, int numofdrawcard){

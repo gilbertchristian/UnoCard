@@ -1,3 +1,5 @@
+//package UnoCard;
+
 import java.util.Scanner;
 
 public class Main {
@@ -7,12 +9,25 @@ public class Main {
         Scanner input = new Scanner(System.in);
         while (playing){
             String command = input.nextLine();     
-
-            switch(command){
-                case "View Player in Turn" :
-                    
+            Game game = new Game();
+            switch(command.toUpperCase()){
+                case "F01" :
+                    game.initGame();
                     break;
-                case "Help":
+                case "F02" :
+                    game.listCard();
+                    break;
+                case "F03" :
+                    //game.discard
+                case "F04" :
+                case "F05" :
+                case "F06" :
+                    game.listPlayers();
+                    break;
+                case "F07" :
+                    game.viewPlayerinTurn();
+                    break;
+                case "F08":
                     // tampilkan deskripsi aturan permainan
                     System.out.println("HIJI merupakan sebuah game adaptasi dari permainan kartu 'UNO'");
                     System.out.println("Teknis permainan: ");
