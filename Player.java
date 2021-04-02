@@ -10,7 +10,7 @@ public class Player{
     public String name;
     private ArrayList<Card> hand; //Kartu yang dimiliki masing2 player
 
-    public player(String name){
+    public Player(String name){
         this.name = name; 
         this.hand = new ArrayList<Card>(7); //shuffle(Card)
     }

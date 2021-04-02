@@ -1,4 +1,4 @@
-public class HijiCard{
+public class Card{
     enum Color{
         Red, Blue, Green, Yellow, Wild, values;
 
@@ -18,7 +18,7 @@ public class HijiCard{
     private final Color color;
     private final Value value;
 
-    public HijiCard(final Color color, final Value value){
+    public Card (final Color color, final Value value){
         this.color = color;
         this.value = value;
     }

@@ -2,35 +2,70 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Collections;
-import javax.smartcardio.Card;
 
 //source : https://www.youtube.com/playlist?list=PLu_zq6omCvuQ_ZoKnE8-CE2nF113p9pxd
 
 public class Game {
     private int currentPlayer;
-    private String[] allPlayers;
-    private Cards tableCard; //ga yakin
+    //private String[] allPlayers;
+    private Card tableCard; //ga yakin
     private boolean declareHiji; //ga yakin
     
     //variable Cards tergantung variable di class card.java
-    private ArrayList<ArrayList<Cards>> allPlayerCards //List semua kartu pemain
-    private ArrayList<Cards> cardPile //List tumpukkan kartu buat discard-an
+    private ArrayList<Player> players; //List  pemain
+    private ArrayList<Card> cardPile; //List tumpukkan kartu buat discard-an
 
     boolean gameDirection; //clockwise = true, anticlockwise = false
     
-    public Game(String[] player){
-        //belom ada queue player + random firstplayer
-        allPlayers = player;
-        currentPlayer = 0;
-        gameDirection = true;
+    private int playerNum;
+    private String playerName;
+    private String[] temp;
 
-        allPlayerCards = new ArrayList<ArrayList<Cards>>(); 
-        cardPile = new ArrayList<Cards>();
+    // public Game(String[] player){
 
-        for (int i = 0; /*i < num_of_player*/; i++){ //ngisi kartu
-            ArrayList<Cards> cardInHand = new ArrayList<Cards>(/*random 7 kartu*/);
-            allPlayersCards.add(cardInHand); //array 7 kartu dimasukin ke array 
+    //     //belom ada queue player + random firstplayer
+    //     allPlayers = player;
+    //     currentPlayer = 0;
+    //     gameDirection = true;
+
+    //     allPlayerCards = new ArrayList<ArrayList<Cards>>(); 
+    //     cardPile = new ArrayList<Cards>();
+
+    //     for (int i = 0; /*i < num_of_player*/; i++){ //ngisi kartu
+    //         ArrayList<Cards> cardInHand = new ArrayList<Cards>(/*random 7 kartu*/);
+    //         allPlayersCards.add(cardInHand); //array 7 kartu dimasukin ke array 
+    //     }
+    // }
+    
+    public void initGame (){
+        // JUMLAH PEMAIN
+        Scanner input = new Scanner(System.in);
+        System.out.print("Masukkan jumlah pemain: ");
+        playerNum = input.nextInt();
+
+        //NAMA PEMAIN
+        System.out.print("Masukkan nama pemain: ");
+        int i =  0;
+        while (playerNum > 0){
+            playerName = input.nextLine();
+            temp[i] = playerName;
+            System.out.print("");
+            i++;
+            playerNum--;
         }
+
+        //RANDOM URUTAN PEMAIN
+        int min = 0;
+        int max = temp.length;
+        int randPlayer = (int)Math.floor(Math.random()*(max-min+1)+min);
+        while (playerNum < temp.length){
+            Player player = new Player(temp[randPlayer]);
+            players.add(player);
+            playerNum++;
+            randPlayer = randPlayer + 1 % temp.length;
+        }
+
+        input.close();
     }
 
     public void StartGame(Game game){ //F01
