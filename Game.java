@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Collections;
+import java.util.Random;
 
 //source : https://www.youtube.com/playlist?list=PLu_zq6omCvuQ_ZoKnE8-CE2nF113p9pxd
 
@@ -20,6 +21,9 @@ public class Game {
     private int playerNum;
     private String playerName;
     private String[] temp;
+
+    //random
+    Random ran = new Random();
 
     // public Game(String[] player){
 
