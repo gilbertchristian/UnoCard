@@ -97,7 +97,8 @@ public class Game {
     }
 
     public void initCard(){
-        Card tableCard = new Card(color, value);
+        //GIMANA RANDOM ENUM?
+        Card tableCard = new Card(/*color*/, /*value*/);
     }
 
     public void Discard(Card card){ //F03
