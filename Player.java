@@ -8,6 +8,7 @@
 
 import java.util.ArrayList;
 import java.util.*;
+
 public class Player{
     public String name;
     public ArrayList<Card> hand; //Kartu yang dimiliki masing2 player
@@ -19,7 +20,7 @@ public class Player{
     
     //Asumsi: Urutan pemain di main program lengkap dengan shufflenya
 
-    public ArrayList<Card> listCards (String name){
+    public void listCards (ArrayList<Card> hand){
         for (int i = 0; i < hand.size(); i++){
             System.out.println((i + 1) + ". " + hand.get(i));
         } 
