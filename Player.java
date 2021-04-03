@@ -42,18 +42,14 @@ public class Player{
     public Card currentCard(int id){
         return hand.get(id);
     }
-    
-    public viewPlayerinTurn(){
-        // bingung di main dishufflenya gimana
-    }
 
-    public listPlayer(){
-        // bingung di main dishufflenya gimana
+    /*public listPlayer(){
+        
         for (int i = 0; i < totalPlayer; i++){
             System.out.println("Pemain " + (i + 1) + ": " + listurutan.get(0));
             System.out.println("Jumlah Kartu: " + player.jumlahKartu());
             System.out.println(player.status); //Sedang giliran/Tidak sedang giliran
         }
-    }
+    }*/
     
 }

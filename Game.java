@@ -31,7 +31,14 @@ public class Game {
         Scanner input = new Scanner(System.in);
         System.out.print("Masukkan jumlah pemain: ");
         playerNum = input.nextInt();
-
+        
+        //APABILA JUMLAH PEMAIN TIDAK 2-6
+        while (playerNum<2 || playerNum>6){
+            System.out.println("Maaf, jumlah pemain minimal 2 orang dan maksimal 6 orang.");
+            System.out.println("Silakan masukkan jumlah pemain yang sesuai: ");
+            playerNum = input.nextInt();
+        }
+        
         //NAMA PEMAIN
         System.out.print("Masukkan nama pemain: ");
         int i =  0;
