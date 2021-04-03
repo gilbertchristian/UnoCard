@@ -22,4 +22,3 @@ public class SkipCard extends EspecialCard{
 		ctrl.applySkip();
 	}
 }
-© 2021 GitHub, Inc.
