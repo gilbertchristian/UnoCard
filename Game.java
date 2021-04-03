@@ -85,7 +85,8 @@ public class Game {
         return getPlayerCardSize(currentPlayer) == 1;
     }
 
-    public void discard(Card card){ //F03
+    public void discard(int card_id){ //F03
+        Card card = getPlayerCard(currentPlayer, card_id);
         //DISCARDNYA VALID
         if (validDiscard(card)){
             cardPile.add(card);
@@ -160,7 +161,7 @@ public class Game {
     }
 
     public Card getPlayerCard(int player_id, int card_id){
-        return players.get(player_id).currentKartu(card_id);
+        return players.get(player_id).currentCard(card_id);
     }
 
     public void nextPlayer(int num){

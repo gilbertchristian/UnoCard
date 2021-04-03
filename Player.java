@@ -39,7 +39,7 @@ public class Player{
         //Untuk dicek pas Declare HIJI
     }
 
-    public Card currentcard(int id){
+    public Card currentCard(int id){
         return hand.get(id);
     }
     

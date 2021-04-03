@@ -18,7 +18,10 @@ public class Main {
                     game.listCard();
                     break;
                 case "F03" :
-                    //game.discard
+                    System.out.print("Pilih nomor kartu yang ingin dikeluarkan: ");
+                    int card_id = input.nextInt();
+                    game.discard(card_id);
+                    break;
                 case "F04" :
                 case "F05" :
                 case "F06" :
