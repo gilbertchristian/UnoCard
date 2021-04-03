@@ -2,6 +2,7 @@
 
 public class Card{
     enum Color{
+		//enumerasi warna dari kartu
         Red, Blue, Green, Yellow, Wild, values;
 
         private static final Color[] colors = Color.values();
@@ -10,6 +11,7 @@ public class Card{
         }
     }
     enum Value{
+		//enumerasi angka dan kemampuan dari kartu 
         Zero, One, Two, Trhee, Four, Five, Six, Seven, Eight, Nine, DrawTwoo, Skip, Reverse, Wild, Wild_Four;
 
         private static final Value[] values = Value.values();
