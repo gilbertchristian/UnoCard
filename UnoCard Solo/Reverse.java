@@ -4,7 +4,8 @@ public class Reverse extends Card{
         super(color, Value.REVERSE);
     }
 
-    public void power(){
-        //
+    public String printCard(){
+        return super.getColor() + " " + "REVERSE";
     }
+
 }

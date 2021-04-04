@@ -1,14 +1,11 @@
-public class DrawTwo extends Card implements Power{    
+public class DrawTwo extends Card{    
     
     public DrawTwo(Color color){
         super(color, Value.DRAW_2);
     }
 
-    public void power(){
-        // Card drown = deckCard.getOneRandomCard();
-        // players.get(currentPlayer).addCard(drown);
+    public String printCard(){
+        return super.getColor() + " " + "DRAW_2";
     }
-
-    
     
 }

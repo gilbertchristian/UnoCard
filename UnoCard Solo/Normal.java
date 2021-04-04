@@ -4,8 +4,8 @@ public class Normal extends Card{
         super(color, value);
     }
 
-    @Override
-    public void power(){
-        //EMPTY
+    public String printCard(){
+        return super.getColor() + " " + super.getValue();
     }
+
 }

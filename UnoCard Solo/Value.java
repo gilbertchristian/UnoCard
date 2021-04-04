@@ -4,5 +4,6 @@ public enum Value {
     DRAW_4,
     WILD,
     REVERSE,
-    SKIP
+    SKIP,
+    NONE
 }

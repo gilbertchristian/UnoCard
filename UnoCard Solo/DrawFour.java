@@ -4,7 +4,8 @@ public class DrawFour extends Card{
         super(Color.WILD, Value.DRAW_4);
     }
 
-    public void power(){
-        //
+    public String printCard(){
+        return super.getColor() + " " + "DRAW_4";
     }
+    
 }

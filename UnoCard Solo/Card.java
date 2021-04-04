@@ -15,9 +15,13 @@ public abstract class Card {
         return this.value;
     }
 
-    public String toString(){
-        return value + " " + color;
+    public void setColor(Color color){
+        this.color = color;
     }
 
-    public abstract void power();
+    // public String toString(){
+    //     return value + " " + color;
+    // }
+
+    public abstract String printCard();
 }

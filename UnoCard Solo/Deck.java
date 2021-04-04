@@ -4,23 +4,23 @@ import java.util.Random;
 
 public class Deck {
     private Random rand = new Random();
-    public ArrayList<Card> deck;
+    public ArrayList<Card> decks;
 
-
+    
     Color[] listColor = { Color.RED, Color.GREEN, Color.BLUE, Color.YELLOW };
     Value[] listValue = { Value.ZERO, Value.ONE, Value.TWO, Value.THREE, Value.FOUR, Value.FIVE, Value.SIX, Value.SEVEN, Value.EIGHT, Value.NINE};
     
-    {   
+    public Deck(){   
         for (Color color : listColor) {
-            deck.add(new DrawTwo(color));
-            deck.add(new Reverse(color));
-            deck.add(new Skip(color));
+            decks.add(new DrawTwo(color));
+            decks.add(new Reverse(color));
+            decks.add(new Skip(color));
             for (Value value : listValue) {
-                deck.add(new Normal(color, value));
+                decks.add(new Normal(color, value));
             }
         }
-        deck.add(new DrawFour());
-        deck.add(new Wild());
+        decks.add(new DrawFour());
+        decks.add(new Wild());
     }
 
     public Color getOneRandomColor(){
@@ -32,7 +32,7 @@ public class Deck {
     }
 
     public Card getOneRandomCard(){
-        Collections.shuffle(deck);
-        return deck.get(0);
+        Collections.shuffle(decks);
+        return decks.get(0);
     }
 }

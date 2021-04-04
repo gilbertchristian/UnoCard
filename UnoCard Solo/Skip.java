@@ -4,7 +4,8 @@ public class Skip extends Card{
         super(color, Value.SKIP);
     }
 
-    public void power(){
-        //
+    public String printCard(){
+        return super.getColor() + " " + "SKIP";
     }
+
 }

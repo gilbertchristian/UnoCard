@@ -4,7 +4,8 @@ public class Wild extends Card{
         super(Color.WILD, Value.WILD);
     }
 
-    public void power(){
-        //
+    public String printCard(){
+        return "WILDCARD";
     }
+    
 }

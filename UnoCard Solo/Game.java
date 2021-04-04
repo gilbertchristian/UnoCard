@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Collections;
+import java.util.InputMismatchException;
 import java.util.Random;
 
 public class Game {
@@ -12,22 +13,23 @@ public class Game {
     private boolean declareHiji; //ga yakin
     
     private ArrayList<Player> players; //List  pemain
-    private ArrayList<Card> cardPile; //List tumpukkan kartu buat discard-an
+    public ArrayList<Card> cardPile; //List tumpukkan kartu buat discard-an
 
     boolean gameDirection; //clockwise = true, anticlockwise = false
     private String[] temp;
 
-    public Deck deckCard = new Deck();
+    public static final Deck deckCard = new Deck();
 
     //random
     Random ran = new Random();
+
+    Scanner input = new Scanner(System.in);
 
     public void initGame (){ //F01
         int playerNum;
         String playerName;
 
         //JUMLAH PEMAIN
-        Scanner input = new Scanner(System.in);
         System.out.print("Masukkan jumlah pemain: ");
         playerNum = input.nextInt();
         
@@ -67,7 +69,7 @@ public class Game {
             }
         }
 
-        input.close();
+        //input.close();
     }
 
     public void listCard(){ //F02
@@ -118,7 +120,7 @@ public class Game {
             
             checkValue(card);        
         }else{
-            //draw 1
+            drawOne(0);
             discard(cardId);
             cycle += 1;
             if(cycle > 1){
@@ -139,7 +141,7 @@ public class Game {
                 nextPlayer(1);
                 break;
             case "Wild":
-                //milih warna
+                setColor();
                 nextPlayer(1);
                 break;
             case "Reverse":
@@ -162,16 +164,48 @@ public class Game {
                     break;
                 }
             case "Draw 2":
-                // DrawTwo drawTwoCard = new DrawTwo(card.getColor());
-                // drawTwoCard.power();
+                drawTwo(1);
                 nextPlayer(1);
                 break;
             case "Draw 4":
-                // DrawFour drawFourCard = new DrawFour();
-                // drawFourCard.power();
+                setColor();
+                drawFour(1);
                 nextPlayer(1);
                 break;
             default :
+        }
+    }
+
+    public void setColor(){
+        try{
+            int pick = input.nextInt();
+            if (pick == 1){
+                getLastCardThrown().setColor(Color.RED);
+            } else if (pick == 2){
+                getLastCardThrown().setColor(Color.BLUE);
+            } else if (pick == 3){
+                getLastCardThrown().setColor(Color.GREEN);
+            } else if (pick == 4){
+                getLastCardThrown().setColor(Color.YELLOW);
+            } else {
+                System.out.print("Input is not valid! Pick another one:");
+                setColor();
+            }
+        }catch(InputMismatchException ex){
+            System.out.println("Input should be an integer!");
+            setColor();
+        }
+    }
+
+    public Color toColor (String color){
+        if (color == "RED"){
+            return Color.RED;
+        } else if (color == "BLUE"){
+            return Color.BLUE;
+        } else if (color == "YELLOW"){
+            return Color.YELLOW;
+        } else {
+            return Color.GREEN;
         }
     }
 
@@ -228,6 +262,10 @@ public class Game {
     //buat draw 2
     public void drawTwo(int playerId){
         draw(currentPlayer + playerId, 2);
+    }
+
+    public void drawOne(int playerId){
+        draw(currentPlayer + playerId, 1);
     }
 
 }
