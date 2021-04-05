@@ -8,8 +8,9 @@ public class Main {
     public static void main(String[] args) {
         System.out.println("Welcome to HIJI-Card!");
         Scanner input = new Scanner(System.in);
+        boolean playing = true;
         while (playing){
-            String command = input.nextLine();     
+            String command = input.next();     
             Game game = new Game();
             switch(command.toUpperCase()){
                 case "F01" :
@@ -73,6 +74,9 @@ public class Main {
                     System.out.println("View Player in Turn \t untuk melihat pemain yang sedang dalam giliran");
                     System.out.println("Help \t\t\t untuk menampilkan deskripsi aturan permainan");
                     System.out.println("Menu \t\t\t untuk menampilkan menu bantuan");
+                    break;
+                case "Exit":
+                    playing = false;
                     break;
                 default:
                     // tampilkan ucapan argumen tidak dikenali

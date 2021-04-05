@@ -19,9 +19,5 @@ public abstract class Card {
         this.color = color;
     }
 
-    // public String toString(){
-    //     return value + " " + color;
-    // }
-
     public abstract String printCard();
 }

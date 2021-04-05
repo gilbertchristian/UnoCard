@@ -12,11 +12,10 @@ public class Game {
     private Card tableCard; //ga yakin
     private boolean declareHiji; //ga yakin
     
-    private ArrayList<Player> players; //List  pemain
-    public ArrayList<Card> cardPile; //List tumpukkan kartu buat discard-an
+    private ArrayList<Player> players = new ArrayList<>(); //List  pemain
+    public ArrayList<Card> cardPile = new ArrayList<>(); //List tumpukkan kartu buat discard-an
 
     boolean gameDirection; //clockwise = true, anticlockwise = false
-    private String[] temp;
 
     public static final Deck deckCard = new Deck();
 
@@ -25,7 +24,7 @@ public class Game {
 
     Scanner input = new Scanner(System.in);
 
-    public void initGame (){ //F01
+    public void initGame (){ //F01 CLEAR
         int playerNum;
         String playerName;
 
@@ -41,31 +40,24 @@ public class Game {
         }
         
         //NAMA PEMAIN
-        System.out.print("Masukkan nama pemain: ");
-        int i =  0;
+        int i = 0;
         while (i < playerNum){
-            playerName = input.nextLine();
-            temp[i] = playerName;
+            System.out.print("Masukkan nama pemain " + (i+1) + ": ");
+            playerName = input.next();
             System.out.print("");
+            players.add(new Player(playerName));
             i++;
         }
-
-        //RANDOM URUTAN PEMAIN
-        int j = 0;
-        int min = 0;
-        int max = temp.length;
-        int randPlayer = (int)Math.floor(Math.random()*(max-min+1)+min);
-        while (j < temp.length){
-            Player player = new Player(temp[randPlayer]);
-            players.add(player);
-            j++;
-            randPlayer = randPlayer + 1 % temp.length;
-        }
-
+        Collections.shuffle(players);
+    
         //BAGI BAGI KARTU
         for (Player p : players){
+            // System.out.println(p.name);
+            // int count = 0;
             for (int k = 0; k < 7; k++){
                 p.addCard(deckCard.getOneRandomCard());
+                // System.out.println(count + " " + p.hand.get(k).printCard());
+                // count++;
             }
         }
 
@@ -73,8 +65,9 @@ public class Game {
     }
 
     public void listCard(){ //F02
-        for (int i = 0; i < getPlayerCardSize(currentPlayer); i++){
-            System.out.println((i+1) + ". " + getPlayerCard(currentPlayer, i).toString());
+        System.out.println("Ini kartu player " + currentPlayer + ": ");
+        for (int i = 0; i < players.get(currentPlayer).hand.size(); i++){
+            System.out.println((i+1) + ". " + players.get(0).hand.get(i).printCard());
         }
     }
 

@@ -1,10 +1,10 @@
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Random;
 
 public class Deck {
-    private Random rand = new Random();
-    public ArrayList<Card> decks;
+    private SecureRandom rand = new SecureRandom();
+    public ArrayList<Card> decks = new ArrayList<>();
 
     
     Color[] listColor = { Color.RED, Color.GREEN, Color.BLUE, Color.YELLOW };
