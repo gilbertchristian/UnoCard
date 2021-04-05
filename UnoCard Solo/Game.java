@@ -1,27 +1,21 @@
 //package UnoCard;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 import java.util.Collections;
 import java.util.InputMismatchException;
-import java.util.Random;
 
 public class Game {
     public int currentPlayer = 0;
     public Card tableCard; //ga yakin
-    private boolean declareHiji; //ga yakin
+    //private boolean declareHiji; //ga yakin
     
     private ArrayList<Player> players = new ArrayList<>(); //List  pemain
-    public ArrayList<Card> cardPile = new ArrayList<>(); //List tumpukkan kartu buat discard-an
+    private ArrayList<Card> cardPile = new ArrayList<>(); //List tumpukkan kartu buat discard-an
 
     boolean gameDirection = true; //clockwise = true, anticlockwise = false
 
     public static final Deck deckCard = new Deck();
-
-    int cycle;
-    //random
-    Random ran = new Random();
 
     Scanner input = new Scanner(System.in);
 
@@ -53,16 +47,10 @@ public class Game {
     
         //BAGI BAGI KARTU
         for (Player p : players){
-            // System.out.println(p.name);
-            // int count = 0;
             for (int k = 0; k < 7; k++){
                 p.addCard(deckCard.getOneRandomCard());
-                // System.out.println(count + " " + p.hand.get(k).printCard());
-                // count++;
             }
         }
-
-        //input.close();
     }
 
     public void listCard(){ //F02
@@ -77,6 +65,43 @@ public class Game {
     public void initCard(){
         tableCard = deckCard.getOneRandomCard();
         cardPile.add(tableCard);
+    }
+
+    public void listPlayers(){ //F06
+        for (int i = 0; i < players.size(); i++){
+            System.out.println("Pemain "+ (i+1) +": "+ players.get(i).name);
+            System.out.println("Jumlah Kartu: "+ players.get(i).hand.size());
+            if(currentPlayer == i){
+                System.out.println("Sedang giliran\n");
+            }else {
+                System.out.println("Tidak sedang giliran\n");
+            }
+        }
+    }
+
+    public void viewPlayerinTurn (){ //F07
+        System.out.println("Sedang giliran: " + getPlayerName(currentPlayer % players.size()));
+        System.out.println("Giliran selanjutnya: " + getPlayerName((currentPlayer + 1) % players.size()));
+    }
+
+    public void draw(int playerId, int numofdrawcard){
+        for (int i = 0; i < numofdrawcard; i++){
+            Card drown = deckCard.getOneRandomCard();
+            players.get(playerId).addCard(drown);
+            System.out.println("Kartu terambil: " + drown.printCard());
+        }
+    }
+
+    public void drawFour(int playerId){
+        draw((currentPlayer + playerId)  % players.size(), 4);
+    }
+    
+    public void drawTwo(int playerId){
+        draw((currentPlayer + playerId)  % players.size(), 2);
+    }
+
+    public void drawOne(int playerId){
+        draw((currentPlayer + playerId)  % players.size(), 1);
     }
 
     public void showTableCard(){
@@ -107,7 +132,6 @@ public class Game {
             drawOne(0);
             nextPlayer(1);
         } else {
-            cycle = 0;
             Card card = getPlayerCard(currentPlayer, cardId-1);
             //DISCARDNYA VALID
             if (validDiscard(card)){
@@ -124,27 +148,13 @@ public class Game {
                 // }else{
                 //     //
                 // }
-                
                 checkValue(card);        
             }else{
                 System.out.println("Kartu tidak cocok, coba lagi");
                 listCard();
                 discard();
-                // if(cycle > 1){
-                //     nextPlayer(1);
-                // } else {
-                //     drawOne(0);
-                //     cycle += 1;
-                //     discard(cardId);
-                // }
             }
         }
-    }
-
-    public void draw(){
-        Card drown = deckCard.getOneRandomCard();
-        players.get(currentPlayer).addCard(drown);
-
     }
 
     public void checkValue(Card card){
@@ -187,20 +197,13 @@ public class Game {
                 gameDirection ^= true; //XOR, kalau true jadi false, kalau false jadi true
                 Collections.reverse(players);
                 break;
-                // if (gameDirection == true){
-                //     nextPlayer(1);
-                //     break;
-                // }else{
-                //     prevPlayer(1);
-                //     break;
-                // }
             case "SKIP":
-                if (gameDirection == true){
-                    System.out.println(players.get(currentPlayer).name + " has been skipped.");
+                if (gameDirection){
+                    System.out.println(players.get((currentPlayer+1) % players.size()).name + " has been skipped.");
                     nextPlayer(2);
                     break;
                 }else{
-                    System.out.println(players.get(currentPlayer).name + " has been skipped."); 
+                    System.out.println(players.get((currentPlayer-1) % players.size()).name + " has been skipped."); 
                     prevPlayer(2);
                     break;
                 }
@@ -242,18 +245,6 @@ public class Game {
         }
     }
 
-    // public Color toColor (String color){
-    //     if (color == "RED"){
-    //         return Color.RED;
-    //     } else if (color == "BLUE"){
-    //         return Color.BLUE;
-    //     } else if (color == "YELLOW"){
-    //         return Color.YELLOW;
-    //     } else {
-    //         return Color.GREEN;
-    //     }
-    // }
-
     public String getPlayerName(int playerId){
         return players.get(playerId).name;
     }
@@ -282,44 +273,5 @@ public class Game {
         currentPlayer = (currentPlayer - num) % players.size();
     }
 
-    public void listPlayers(){ //F06
-        for (int i = 0; i < players.size(); i++){
-            System.out.println("Pemain "+ (i+1) +": "+ players.get(i).name);
-            System.out.println("Jumlah Kartu: "+ players.get(i).hand.size());
-            if(currentPlayer == i){
-                System.out.println("Sedang giliran\n");
-            }else {
-                System.out.println("Tidak sedang giliran\n");
-            }
-        }
-    }
-
-    public void viewPlayerinTurn (){ //F07
-        System.out.println("Sedang giliran: " + getPlayerName(currentPlayer % players.size()));
-        System.out.println("Giliran selanjutnya: " + getPlayerName((currentPlayer + 1) % players.size()));
-    }
-
-    public void draw(int playerId, int numofdrawcard){
-        for (int i = 0; i < numofdrawcard; i++){
-            Card drown = deckCard.getOneRandomCard();
-            players.get(playerId).addCard(drown);
-            System.out.println("Kartu terambil: " + drown.printCard());
-        }
-
-    }
     
-    //buat draw 4
-    public void drawFour(int playerId){
-        draw(currentPlayer + playerId, 4);
-    }
-    
-    //buat draw 2
-    public void drawTwo(int playerId){
-        draw(currentPlayer + playerId, 2);
-    }
-
-    public void drawOne(int playerId){
-        draw(currentPlayer + playerId, 1);
-    }
-
 }

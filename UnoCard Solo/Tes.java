@@ -37,7 +37,6 @@ public class Tes {
                     System.out.println("[6] : Keluar dari permainan");
                     break;
                 case 1 :
-                    System.out.println(game.getCurrentPlayer());
                     System.out.println("Sekarang giliran " + game.getCurrentPlayerName());
                     game.listCard();
                     game.showTableCard();

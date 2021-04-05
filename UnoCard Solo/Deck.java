@@ -4,8 +4,7 @@ import java.util.Collections;
 
 public class Deck {
     private SecureRandom rand = new SecureRandom();
-    public ArrayList<Card> decks = new ArrayList<>();
-
+    private ArrayList<Card> decks = new ArrayList<>();
     
     Color[] listColor = { Color.RED, Color.GREEN, Color.BLUE, Color.YELLOW };
     Value[] listValue = { Value.ZERO, Value.ONE, Value.TWO, Value.THREE, Value.FOUR, Value.FIVE, Value.SIX, Value.SEVEN, Value.EIGHT, Value.NINE};

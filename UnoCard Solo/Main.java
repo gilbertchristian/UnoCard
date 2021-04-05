@@ -3,7 +3,7 @@
 import java.util.Scanner;
 
 public class Main {
-    private static boolean playing;
+    //private static boolean playing;
 
     public static void main(String[] args) {
         System.out.println("Welcome to HIJI-Card!");
@@ -21,7 +21,7 @@ public class Main {
                     break;
                 case "F03" :
                     System.out.print("Pilih nomor kartu yang ingin dikeluarkan: ");
-                    int cardId = input.nextInt();
+                    //int cardId = input.nextInt();
                     //game.discard(cardId);
                     break;
                 case "F04" :
