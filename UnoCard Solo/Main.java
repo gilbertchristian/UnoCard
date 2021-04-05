@@ -22,7 +22,7 @@ public class Main {
                 case "F03" :
                     System.out.print("Pilih nomor kartu yang ingin dikeluarkan: ");
                     int cardId = input.nextInt();
-                    game.discard(cardId);
+                    //game.discard(cardId);
                     break;
                 case "F04" :
                 case "F05" :
@@ -30,7 +30,7 @@ public class Main {
                     game.listPlayers();
                     break;
                 case "F07" :
-                    game.viewPlayerinTurn();
+                    //game.viewPlayerinTurn();
                     break;
                 case "F08":
                     // tampilkan deskripsi aturan permainan

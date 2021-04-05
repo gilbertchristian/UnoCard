@@ -8,17 +8,18 @@ import java.util.InputMismatchException;
 import java.util.Random;
 
 public class Game {
-    public int currentPlayer;
-    private Card tableCard; //ga yakin
+    public int currentPlayer = 0;
+    public Card tableCard; //ga yakin
     private boolean declareHiji; //ga yakin
     
     private ArrayList<Player> players = new ArrayList<>(); //List  pemain
     public ArrayList<Card> cardPile = new ArrayList<>(); //List tumpukkan kartu buat discard-an
 
-    boolean gameDirection; //clockwise = true, anticlockwise = false
+    boolean gameDirection = true; //clockwise = true, anticlockwise = false
 
     public static final Deck deckCard = new Deck();
 
+    int cycle;
     //random
     Random ran = new Random();
 
@@ -65,15 +66,21 @@ public class Game {
     }
 
     public void listCard(){ //F02
-        System.out.println("Ini kartu player " + currentPlayer + ": ");
-        for (int i = 0; i < players.get(currentPlayer).hand.size(); i++){
-            System.out.println((i+1) + ". " + players.get(0).hand.get(i).printCard());
+        System.out.println("Ini kartu " + players.get(currentPlayer).name + ": ");
+        int i = 0;
+        for (Card c : players.get(currentPlayer).hand){
+            System.out.println("[" + (i+1) + "]" + c.printCard());
+            i++;
         }
     }
 
     public void initCard(){
         tableCard = deckCard.getOneRandomCard();
         cardPile.add(tableCard);
+    }
+
+    public void showTableCard(){
+        System.out.println("Kartu terakhir: " + getLastCardThrown().printCard() + "\n");
     }
 
     public Card getLastCardThrown(){
@@ -92,33 +99,49 @@ public class Game {
         return getPlayerCardSize(playerId) == 1;
     }
 
-    public void discard(int cardId){ //F03
-        int cycle = 0;
-        Card card = getPlayerCard(currentPlayer, cardId);
+    public void buang(int cardId){
+        Card card = getPlayerCard(currentPlayer, cardId-1);
+        if (validDiscard(card)){
+            cardPile.add(card);
+            players.get(currentPlayer).hand.remove(card);
+        }else{
+
+        }
+    }
+
+    public void discard(){ //F03
+        System.out.println("Kartu mana yang mau dibuang?");
+        int cardId = input.nextInt();
+        cycle = 0;
+        Card card = getPlayerCard(currentPlayer, cardId-1);
         //DISCARDNYA VALID
         if (validDiscard(card)){
             cardPile.add(card);
             players.get(currentPlayer).hand.remove(card);
         
             //KARTU ABIS
-            if (emptyHand(currentPlayer)){
-                 System.out.println("Congratulation " + getPlayerName(currentPlayer) + "! You're the winner of this round."); 
-            }
-            //KARTU TINGGAL SATU
-            if (isOneCardLeft(currentPlayer)){ 
-                //
-            }else{
-                //
-            }
+            // if (emptyHand(currentPlayer)){
+            //      System.out.println("Congratulation " + getPlayerName(currentPlayer) + "! You're the winner of this round."); 
+            // }
+            // //KARTU TINGGAL SATU
+            // if (isOneCardLeft(currentPlayer)){ 
+            //     //
+            // }else{
+            //     //
+            // }
             
             checkValue(card);        
         }else{
-            drawOne(0);
-            discard(cardId);
-            cycle += 1;
-            if(cycle > 1){
-                nextPlayer(1);
-            }
+            System.out.println("Kartu tidak cocok, coba lagi");
+            listCard();
+            discard();
+            // if(cycle > 1){
+            //     nextPlayer(1);
+            // } else {
+            //     drawOne(0);
+            //     cycle += 1;
+            //     discard(cardId);
+            // }
         }
     }
 
@@ -224,12 +247,12 @@ public class Game {
 
     public void listPlayers(){ //F06
         for (int i = 0; i < players.size(); i++){
-            System.out.println("Pemain "+ (i+1) +": "+ getPlayerName(i));
-            System.out.println("Jumlah Kartu: "+ getPlayerCardSize(i));
+            System.out.println("Pemain "+ (i+1) +": "+ players.get(i).name);
+            System.out.println("Jumlah Kartu: "+ players.get(i).hand.size());
             if(currentPlayer == i){
-                System.out.println("Sedang giliran");
+                System.out.println("Sedang giliran\n");
             }else {
-                System.out.println("Tidak sedang giliran");
+                System.out.println("Tidak sedang giliran\n");
             }
         }
     }
