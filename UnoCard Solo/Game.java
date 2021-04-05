@@ -116,6 +116,10 @@ public class Game {
         return card.getColor() == getLastCardThrown().getColor() || card.getValue() == getLastCardThrown().getValue() || card.getColor() == Color.WILD;
     }
 
+    public boolean validMultiDiscard(Card card){
+        return card.getColor() == getLastCardThrown().getColor() && card.getValue() == getLastCardThrown().getValue();
+    }
+
     public boolean emptyHand(int playerId){
         return players.get(playerId).hand.isEmpty();
     }
@@ -126,12 +130,12 @@ public class Game {
 
     public void discard(){ //F03
         System.out.println("Kartu mana yang mau dibuang?");
-        System.out.println("Menyerah? silahkan tekan [0] untuk draw 1");
+        System.out.println("Tekan [-1] untuk draw 1 dan menyerah");
         int cardId = input.nextInt();
-        if (cardId == 0){
+        if (cardId == -1){
             drawOne(0);
             nextPlayer(1);
-        } else {
+        }else {
             Card card = getPlayerCard(currentPlayer, cardId-1);
             //DISCARDNYA VALID
             if (validDiscard(card)){
@@ -148,7 +152,7 @@ public class Game {
                 // }else{
                 //     //
                 // }
-                checkValue(card);        
+                checkValue(card);  
             }else{
                 System.out.println("Kartu tidak cocok, coba lagi");
                 listCard();
