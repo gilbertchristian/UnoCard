@@ -88,7 +88,7 @@ public class Game {
     }
 
     public boolean validDiscard(Card card){
-        return card.getColor() == getLastCardThrown().getColor() || card.getValue() == getLastCardThrown().getValue();
+        return card.getColor() == getLastCardThrown().getColor() || card.getValue() == getLastCardThrown().getValue() || card.getColor() == Color.WILD;
     }
 
     public boolean emptyHand(int playerId){
@@ -99,19 +99,11 @@ public class Game {
         return getPlayerCardSize(playerId) == 1;
     }
 
-    public void buang(int cardId){
-        Card card = getPlayerCard(currentPlayer, cardId-1);
-        if (validDiscard(card)){
-            cardPile.add(card);
-            players.get(currentPlayer).hand.remove(card);
-        }else{
-
-        }
-    }
-
     public void discard(){ //F03
         System.out.println("Kartu mana yang mau dibuang?");
+        System.out.println("Menyerah? silahkan tekan [0] untuk draw 1");
         int cardId = input.nextInt();
+        int draw = cardId;
         cycle = 0;
         Card card = getPlayerCard(currentPlayer, cardId-1);
         //DISCARDNYA VALID
@@ -120,9 +112,9 @@ public class Game {
             players.get(currentPlayer).hand.remove(card);
         
             //KARTU ABIS
-            // if (emptyHand(currentPlayer)){
-            //      System.out.println("Congratulation " + getPlayerName(currentPlayer) + "! You're the winner of this round."); 
-            // }
+            if (emptyHand(currentPlayer)){
+                 System.out.println("Congratulation " + getPlayerName(currentPlayer) + "! You're the winner of this round."); 
+            }
             // //KARTU TINGGAL SATU
             // if (isOneCardLeft(currentPlayer)){ 
             //     //
@@ -131,6 +123,9 @@ public class Game {
             // }
             
             checkValue(card);        
+        }else if(draw == 0){
+            drawOne(0);
+            nextPlayer(1);
         }else{
             System.out.println("Kartu tidak cocok, coba lagi");
             listCard();
@@ -228,6 +223,10 @@ public class Game {
     public String getPlayerName(int playerId){
         return players.get(playerId).name;
     }
+    
+    public String getCurrentPlayerName(){
+        return players.get(currentPlayer).name;
+    }
 
     public int getPlayerCardSize(int playerId){
         return players.get(playerId).jumlahKartu();
@@ -266,6 +265,7 @@ public class Game {
         for (int i = 0; i < numofdrawcard; i++){
             Card drown = deckCard.getOneRandomCard();
             players.get(playerId).addCard(drown);
+            System.out.println("Kartu terambil: " + drown.printCard());
         }
 
     }
