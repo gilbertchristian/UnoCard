@@ -135,7 +135,7 @@ public class Game {
         if (cardId == -1){
             drawOne(0);
             nextPlayer(1);
-        }else {
+        }else if (cardId > 0){
             Card card = getPlayerCard(currentPlayer, cardId-1);
             //DISCARDNYA VALID
             if (validDiscard(card)){
@@ -158,6 +158,9 @@ public class Game {
                 listCard();
                 discard();
             }
+        }else{
+            System.out.println("Nomor kartu tidak valid, coba lagi");
+            discard();
         }
     }
 
