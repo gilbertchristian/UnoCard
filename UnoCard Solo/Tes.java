@@ -10,22 +10,34 @@ public class Tes {
         game.initGame();
         game.initCard();
         System.out.println("\nPermainan bisa diakses dengan perintah berikut: ");
+        System.out.println("[0] : Perintah permainan");
         System.out.println("[1] : Memulai giliran");
         System.out.println("[2] : Menampilkan kartu pemain");
         System.out.println("[3] : Melihat daftar pemain");
         System.out.println("[4] : Melihat giliran pemain");
         System.out.println("[5] : Bantuan permainan");
         System.out.println("[6] : Keluar dari permainan");
-        System.out.println("==============================================");
-        System.out.print("Perintah: ");
         
+
         while (playing){
-            
+            System.out.println("==============================================");
+            System.out.print("Perintah: ");
             int command = input.nextInt();
             System.out.println("==============================================");
 
             switch (command){
+                case 0 :
+                    System.out.println("\nPermainan bisa diakses dengan perintah berikut: ");
+                    System.out.println("[0] : Perintah permainan");
+                    System.out.println("[1] : Memulai giliran");
+                    System.out.println("[2] : Menampilkan kartu pemain");
+                    System.out.println("[3] : Melihat daftar pemain");
+                    System.out.println("[4] : Melihat giliran pemain");
+                    System.out.println("[5] : Bantuan permainan");
+                    System.out.println("[6] : Keluar dari permainan");
+                    break;
                 case 1 :
+                    System.out.println(game.getCurrentPlayer());
                     System.out.println("Sekarang giliran " + game.getCurrentPlayerName());
                     game.listCard();
                     game.showTableCard();

@@ -5,7 +5,6 @@ public class Wild extends Card{
     }
 
     public String printCard(){
-        return "WILDCARD";
+        return super.getColor() + " CARD";
     }
-    
 }

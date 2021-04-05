@@ -103,40 +103,41 @@ public class Game {
         System.out.println("Kartu mana yang mau dibuang?");
         System.out.println("Menyerah? silahkan tekan [0] untuk draw 1");
         int cardId = input.nextInt();
-        int draw = cardId;
-        cycle = 0;
-        Card card = getPlayerCard(currentPlayer, cardId-1);
-        //DISCARDNYA VALID
-        if (validDiscard(card)){
-            cardPile.add(card);
-            players.get(currentPlayer).hand.remove(card);
-        
-            //KARTU ABIS
-            if (emptyHand(currentPlayer)){
-                 System.out.println("Congratulation " + getPlayerName(currentPlayer) + "! You're the winner of this round."); 
-            }
-            // //KARTU TINGGAL SATU
-            // if (isOneCardLeft(currentPlayer)){ 
-            //     //
-            // }else{
-            //     //
-            // }
-            
-            checkValue(card);        
-        }else if(draw == 0){
+        if (cardId == 0){
             drawOne(0);
             nextPlayer(1);
-        }else{
-            System.out.println("Kartu tidak cocok, coba lagi");
-            listCard();
-            discard();
-            // if(cycle > 1){
-            //     nextPlayer(1);
-            // } else {
-            //     drawOne(0);
-            //     cycle += 1;
-            //     discard(cardId);
-            // }
+        } else {
+            cycle = 0;
+            Card card = getPlayerCard(currentPlayer, cardId-1);
+            //DISCARDNYA VALID
+            if (validDiscard(card)){
+                cardPile.add(card);
+                players.get(currentPlayer).hand.remove(card);
+            
+                //KARTU ABIS
+                if (emptyHand(currentPlayer)){
+                    System.out.println("Congratulation " + getPlayerName(currentPlayer) + "! You're the winner of this round."); 
+                }
+                // //KARTU TINGGAL SATU
+                // if (isOneCardLeft(currentPlayer)){ 
+                //     //
+                // }else{
+                //     //
+                // }
+                
+                checkValue(card);        
+            }else{
+                System.out.println("Kartu tidak cocok, coba lagi");
+                listCard();
+                discard();
+                // if(cycle > 1){
+                //     nextPlayer(1);
+                // } else {
+                //     drawOne(0);
+                //     cycle += 1;
+                //     discard(cardId);
+                // }
+            }
         }
     }
 
@@ -148,37 +149,66 @@ public class Game {
 
     public void checkValue(Card card){
         switch(card.getValue().name()) { //ENUM TO STRING
-            case "Normal":
+            case "ZERO"  :
                 nextPlayer(1);
                 break;
-            case "Wild":
+            case "ONE"  :
+                nextPlayer(1);
+                break;
+            case "TWO"  :
+                nextPlayer(1);
+                break;
+            case "THREE"  :
+                nextPlayer(1);
+                break;
+            case "FOUR"  :
+                nextPlayer(1);
+                break;
+            case "FIVE"  :
+                nextPlayer(1);
+                break;
+            case "SIX"  :
+                nextPlayer(1);
+                break;
+            case "SEVEN"  :
+                nextPlayer(1);
+                break;
+            case "EIGHT"  :
+                nextPlayer(1);
+                break;
+            case "NINE"  :
+                nextPlayer(1);
+                break;
+            case "WILD":
                 setColor();
                 nextPlayer(1);
                 break;
-            case "Reverse":
+            case "REVERSE":
                 gameDirection ^= true; //XOR, kalau true jadi false, kalau false jadi true
+                Collections.reverse(players);
+                break;
+                // if (gameDirection == true){
+                //     nextPlayer(1);
+                //     break;
+                // }else{
+                //     prevPlayer(1);
+                //     break;
+                // }
+            case "SKIP":
                 if (gameDirection == true){
-                    nextPlayer(1);
-                    break;
-                }else{
-                    prevPlayer(1);
-                    break;
-                }
-            case "Skip":
-                if (gameDirection == true){
-                    System.out.println(players.get(currentPlayer) + " has been skipped.");
+                    System.out.println(players.get(currentPlayer).name + " has been skipped.");
                     nextPlayer(2);
                     break;
                 }else{
-                    System.out.println(players.get(currentPlayer) + " has been skipped."); 
+                    System.out.println(players.get(currentPlayer).name + " has been skipped."); 
                     prevPlayer(2);
                     break;
                 }
-            case "Draw 2":
+            case "DRAW_2":
                 drawTwo(1);
                 nextPlayer(1);
                 break;
-            case "Draw 4":
+            case "DRAW_4":
                 setColor();
                 drawFour(1);
                 nextPlayer(1);
@@ -189,6 +219,10 @@ public class Game {
 
     public void setColor(){
         try{
+            System.out.println("[1] : RED");
+            System.out.println("[2] : BLUE");
+            System.out.println("[3] : GREEN");
+            System.out.println("[4] : YELLOW");
             int pick = input.nextInt();
             if (pick == 1){
                 getLastCardThrown().setColor(Color.RED);
@@ -208,17 +242,17 @@ public class Game {
         }
     }
 
-    public Color toColor (String color){
-        if (color == "RED"){
-            return Color.RED;
-        } else if (color == "BLUE"){
-            return Color.BLUE;
-        } else if (color == "YELLOW"){
-            return Color.YELLOW;
-        } else {
-            return Color.GREEN;
-        }
-    }
+    // public Color toColor (String color){
+    //     if (color == "RED"){
+    //         return Color.RED;
+    //     } else if (color == "BLUE"){
+    //         return Color.BLUE;
+    //     } else if (color == "YELLOW"){
+    //         return Color.YELLOW;
+    //     } else {
+    //         return Color.GREEN;
+    //     }
+    // }
 
     public String getPlayerName(int playerId){
         return players.get(playerId).name;
@@ -226,6 +260,10 @@ public class Game {
     
     public String getCurrentPlayerName(){
         return players.get(currentPlayer).name;
+    }
+
+    public int getCurrentPlayer(){
+        return this.currentPlayer;
     }
 
     public int getPlayerCardSize(int playerId){
@@ -237,11 +275,11 @@ public class Game {
     }
 
     public void nextPlayer(int num){
-        currentPlayer = currentPlayer + num % players.size();
+        currentPlayer = (currentPlayer + num) % players.size();
     }
 
     public void prevPlayer(int num){
-        currentPlayer = currentPlayer - num % players.size();
+        currentPlayer = (currentPlayer - num) % players.size();
     }
 
     public void listPlayers(){ //F06
@@ -257,8 +295,8 @@ public class Game {
     }
 
     public void viewPlayerinTurn (){ //F07
-        System.out.println("Sedang giliran: " + getPlayerName(currentPlayer));
-        System.out.println("Giliran selanjutnya: " + getPlayerName(currentPlayer + 1));
+        System.out.println("Sedang giliran: " + getPlayerName(currentPlayer % players.size()));
+        System.out.println("Giliran selanjutnya: " + getPlayerName((currentPlayer + 1) % players.size()));
     }
 
     public void draw(int playerId, int numofdrawcard){
