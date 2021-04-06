@@ -3,7 +3,7 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Collections;
-import java.util.InputMismatchException;
+//import java.util.InputMismatchException;
 
 public class Game {
     public int currentPlayer = 0;
@@ -118,7 +118,7 @@ public class Game {
 
     public void isEmptyHand(){
         if (players.get(currentPlayer).hand.isEmpty()){
-            System.out.println("Congratulation " + getPlayerName(currentPlayer) + "! You're the winner of this round."); 
+            System.out.println("Yey! " + getPlayerName(currentPlayer) + " Menang"); 
             System.out.println("Terimakasih telah bermain");
             System.exit(0);
         }
@@ -187,8 +187,8 @@ public class Game {
 
     public void declareHji(){
         System.out.println("Declare HIJI? [Please enter value 1 or 2]");
-        System.out.println("1. Yes");
-        System.out.println("2. No");
+        System.out.println("[1] Yes");
+        System.out.println("[2] No");
         long then = System.currentTimeMillis();
         int declare = input.nextInt();
         long now = System.currentTimeMillis();
@@ -196,23 +196,23 @@ public class Game {
         if ( declare == 1){
             if (isOneCardLeft(currentPlayer)){
                 if (waktu > 3d){
-                    System.out.println("You took " + waktu + " seconds to declare HIJI.");
-                    System.out.println("Declare hiji failed.");
+                    System.out.println("Waktu kamu: " + waktu);
+                    System.out.println("Declare hiji gagal.");
                     drawTwo(0);
                 }
                 else{
-                    System.out.println("You took " + waktu + " seconds to declare HIJI.");
-                    System.out.println("Declare HIJI accomplished");
+                    System.out.println("Waktu kamu: " + waktu);
+                    System.out.println("Declare HIJI berhasil");
                 }
             }
             else{
-                System.out.println("You are not supposed to declare HIJI");
+                System.out.println("Belum boleh declare HIJI");
                 drawTwo(0);
             }
         }
         else if (declare == 2){
             if (isOneCardLeft(currentPlayer)){
-                System.out.println("You have one card left and are supposed to declare HIJI");
+                System.out.println("kartu kamu tinggal 1, kamu seharusnya declare HIJI");
                 drawTwo(0);
             } 
         }
@@ -228,11 +228,11 @@ public class Game {
                 break;
             case "SKIP":
                 if (gameDirection){
-                    System.out.println(players.get((currentPlayer+1) % players.size()).name + " has been skipped.");
+                    System.out.println("Giliran " + players.get((currentPlayer+1) % players.size()).name + " hangus");
                     currentPlayer = (currentPlayer + 1) % players.size();
                     break;
                 }else{
-                    System.out.println(players.get((currentPlayer-1) % players.size()).name + " has been skipped."); 
+                    System.out.println("Giliran " + players.get((currentPlayer-1) % players.size()).name + " hangus"); 
                     currentPlayer = (currentPlayer - 1) % players.size();
                     if (currentPlayer==-1){
                         currentPlayer = players.size() - 1;
@@ -257,8 +257,9 @@ public class Game {
             prevPlayer(1);
         }
     }
+
     public void setColor(){
-        try{
+        // try{
             System.out.println("Silahkan pilih warna");
             System.out.println("[1] : RED");
             System.out.println("[2] : BLUE");
@@ -274,13 +275,13 @@ public class Game {
             } else if (pick == 4){
                 getLastCardThrown().setColor(Color.YELLOW);
             } else {
-                System.out.print("Input is not valid! Pick another one:");
+                System.out.print("Silahkan masukkan no 1 - 4");
                 setColor();
             }
-        }catch(InputMismatchException ex){
-            System.out.println("Input should be an integer!");
-            setColor();
-        }
+        // }catch(InputMismatchException ex){
+        //     System.out.println("Input should be an integer!");
+        //     setColor();
+        // }
     }
 
     public String getPlayerName(int playerId){
