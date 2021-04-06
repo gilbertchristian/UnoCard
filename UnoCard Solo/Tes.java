@@ -41,6 +41,7 @@ public class Tes {
                     game.listCard();
                     game.showTableCard();
                     game.discard();
+                    game.nextPlayer(1);
                     break;
                 case 2 :
                     game.listCard();
