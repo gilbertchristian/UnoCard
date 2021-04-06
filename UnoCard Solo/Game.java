@@ -46,8 +46,6 @@ public class Game {
             for (int k = 0; k < 7 ; k++){
                 p.addCard(deckCard.getOneRandomCard());
             }
-            p.addCard(deckCard.a());
-            p.addCard(deckCard.a());
         }
     }
 
@@ -136,6 +134,8 @@ public class Game {
     }
 
     public void discard(){ //F03
+        listCard();
+        showTableCard();
         System.out.println("Kartu mana yang mau dibuang?");
         System.out.println("Tekan [-1] untuk draw 1 dan menyerah");
         int cardId = input.nextInt();
@@ -155,7 +155,6 @@ public class Game {
                     checkValue(card);  
                 }else{
                     System.out.println("Kartu tidak cocok, coba lagi");
-                    listCard();
                     discard();
                 } 
             }else {

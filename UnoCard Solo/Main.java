@@ -38,8 +38,6 @@ public class Main {
                     break;
                 case 1 :
                     System.out.println("Sekarang giliran " + game.getCurrentPlayerName());
-                    game.listCard();
-                    game.showTableCard();
                     game.discard();
                     game.endOfTurn();
                     break;
