@@ -7,5 +7,4 @@ public class DrawFour extends Card{
     public String printCard(){
         return super.getColor() + " " + "DRAW_4";
     }
-    
 }

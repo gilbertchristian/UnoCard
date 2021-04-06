@@ -7,5 +7,4 @@ public class Normal extends Card{
     public String printCard(){
         return super.getColor() + " " + super.getValue();
     }
-
 }

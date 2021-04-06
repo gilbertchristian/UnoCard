@@ -1,39 +1,58 @@
-//package UnoCard;
-
 import java.util.Scanner;
 
 public class Main {
-    //private static boolean playing;
-
+    private static boolean playing = true;
     public static void main(String[] args) {
-        System.out.println("Welcome to HIJI-Card!");
+        System.out.println("Selamat datang di permainan HIJI!\n");
+        
         Scanner input = new Scanner(System.in);
-        boolean playing = true;
+        Game game = new Game();
+        game.initGame();
+        game.initCard();
+        System.out.println("\nPermainan bisa diakses dengan perintah berikut: ");
+        System.out.println("[0] : Perintah permainan");
+        System.out.println("[1] : Memulai giliran");
+        System.out.println("[2] : Menampilkan kartu pemain");
+        System.out.println("[3] : Melihat daftar pemain");
+        System.out.println("[4] : Melihat giliran pemain");
+        System.out.println("[5] : Bantuan permainan");
+        System.out.println("[6] : Keluar dari permainan");
+        
+
         while (playing){
-            String command = input.next();     
-            Game game = new Game();
-            switch(command.toUpperCase()){
-                case "F01" :
-                    game.initGame();
+            System.out.println("==============================================");
+            System.out.print("Perintah: ");
+            int command = input.nextInt();
+            System.out.println("==============================================");
+
+            switch (command){
+                case 0 :
+                    System.out.println("\nPermainan bisa diakses dengan perintah berikut: ");
+                    System.out.println("[0] : Perintah permainan");
+                    System.out.println("[1] : Memulai giliran");
+                    System.out.println("[2] : Menampilkan kartu pemain");
+                    System.out.println("[3] : Melihat daftar pemain");
+                    System.out.println("[4] : Melihat giliran pemain");
+                    System.out.println("[5] : Bantuan permainan");
+                    System.out.println("[6] : Keluar dari permainan");
                     break;
-                case "F02" :
+                case 1 :
+                    System.out.println("Sekarang giliran " + game.getCurrentPlayerName());
+                    game.listCard();
+                    game.showTableCard();
+                    game.discard();
+                    game.endOfTurn();
+                    break;
+                case 2 :
                     game.listCard();
                     break;
-                case "F03" :
-                    System.out.print("Pilih nomor kartu yang ingin dikeluarkan: ");
-                    //int cardId = input.nextInt();
-                    //game.discard(cardId);
-                    break;
-                case "F04" :
-                case "F05" :
-                case "F06" :
+                case 3 :
                     game.listPlayers();
                     break;
-                case "F07" :
-                    //game.viewPlayerinTurn();
+                case 4 :
+                    game.viewPlayerinTurn();
                     break;
-                case "F08":
-                    // tampilkan deskripsi aturan permainan
+                case 5 :
                     System.out.println("HIJI merupakan sebuah game adaptasi dari permainan kartu 'UNO'");
                     System.out.println("Teknis permainan: ");
                     System.out.println("- Jumlah pemain 2-6 orang.");
@@ -63,26 +82,15 @@ public class Main {
                     System.out.println("- Wildcard  → pemain hanya dapat memilih satu warna.");
                     System.out.println("");
                     break;
-                case "Menu":
-                    // tampilkan bantuan program
-                    System.out.println("Gunakan menu berikut:");
-                    System.out.println("Start Game \t\t untuk memulai permainan");
-                    System.out.println("List Card \t\t untuk melihat kartu yang ada di tangan");
-                    System.out.println("Discard \t\t untuk mengeluarkan kartu");
-                    System.out.println("Draw \t\t\t untuk mengambil satu kartu dari deck");
-                    System.out.println("List Players \t\t untuk melihat semua nama pemain, jumlah kartu di tangan, dan giliran");
-                    System.out.println("View Player in Turn \t untuk melihat pemain yang sedang dalam giliran");
-                    System.out.println("Help \t\t\t untuk menampilkan deskripsi aturan permainan");
-                    System.out.println("Menu \t\t\t untuk menampilkan menu bantuan");
-                    break;
-                case "Exit":
+                case 6 : 
                     playing = false;
+                    System.out.println("Terimakasih telah bermain");
                     break;
-                default:
-                    // tampilkan ucapan argumen tidak dikenali
-                    System.out.println("Menu tidak ada, silahkan ketik 'Menu' untuk bantuan");
+                default :
+                    System.out.println("Kode tidak tersedia di permainan, coba lagi");
             }
         }
-        input.close();  
+
+        input.close();
     }
 }

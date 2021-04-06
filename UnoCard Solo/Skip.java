@@ -7,5 +7,4 @@ public class Skip extends Card{
     public String printCard(){
         return super.getColor() + " " + "SKIP";
     }
-
 }

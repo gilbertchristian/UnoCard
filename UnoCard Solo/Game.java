@@ -7,13 +7,13 @@ import java.util.InputMismatchException;
 
 public class Game {
     public int currentPlayer = 0;
-    public Card tableCard; //ga yakin
-    //private boolean declareHiji; //ga yakin
+    public Card tableCard;
+    //private boolean declareHiji;
     
-    private ArrayList<Player> players = new ArrayList<>(); //List  pemain
-    private ArrayList<Card> cardPile = new ArrayList<>(); //List tumpukkan kartu buat discard-an
+    private ArrayList<Player> players = new ArrayList<>();
+    private ArrayList<Card> cardPile = new ArrayList<>(); 
 
-    boolean gameDirection = true; //clockwise = true, anticlockwise = false
+    boolean gameDirection = true;
     int multi = 0;
     public static final Deck deckCard = new Deck();
 
@@ -22,18 +22,15 @@ public class Game {
     public void initGame (){ //F01 CLEAR
         int playerNum;
         String playerName;
-
         //JUMLAH PEMAIN
         System.out.print("Masukkan jumlah pemain: ");
         playerNum = input.nextInt();
-        
         //APABILA JUMLAH PEMAIN TIDAK 2-6
         while (playerNum<2 || playerNum>6){
             System.out.println("Maaf, jumlah pemain minimal 2 orang dan maksimal 6 orang.");
             System.out.print("Silakan masukkan jumlah pemain yang sesuai: ");
             playerNum = input.nextInt();
         }
-        
         //NAMA PEMAIN
         int i = 0;
         while (i < playerNum){
@@ -44,7 +41,6 @@ public class Game {
             i++;
         }
         Collections.shuffle(players);
-    
         //BAGI BAGI KARTU
         for (Player p : players){
             for (int k = 0; k < 7; k++){
@@ -138,13 +134,11 @@ public class Game {
     }
 
     public void discard(){ //F03
-        System.out.println(multi);
         System.out.println("Kartu mana yang mau dibuang?");
         System.out.println("Tekan [-1] untuk draw 1 dan menyerah");
         int cardId = input.nextInt();
         if (cardId == -1){
             drawOne(0);
-            //nextPlayer(1);
         }else if (cardId > 0){
             Card card = getPlayerCard(currentPlayer, cardId-1);
             //DISCARDNYA VALID
@@ -196,50 +190,16 @@ public class Game {
             discard();
         }else{
             System.out.println("Giliran kamu selesai");
-            //nextPlayer(1);
         }
     }
 
     public void checkValue(Card card){
         switch(card.getValue().name()) { //ENUM TO STRING
-            // case "ZERO"  :
-            //     nextPlayer(1);
-            //     break;
-            // case "ONE"  :
-            //     nextPlayer(1);
-            //     break;
-            // case "TWO"  :
-            //     nextPlayer(1);
-            //     break;
-            // case "THREE"  :
-            //     nextPlayer(1);
-            //     break;
-            // case "FOUR"  :
-            //     nextPlayer(1);
-            //     break;
-            // case "FIVE"  :
-            //     nextPlayer(1);
-            //     break;
-            // case "SIX"  :
-            //     nextPlayer(1);
-            //     break;
-            // case "SEVEN"  :
-            //     nextPlayer(1);
-            //     break;
-            // case "EIGHT"  :
-            //     nextPlayer(1);
-            //     break;
-            // case "NINE"  :
-            //     nextPlayer(1);
-            //     break;
             case "WILD":
                 setColor();
-                // nextPlayer(1);
                 break;
             case "REVERSE":
                 gameDirection ^= true; //XOR, kalau true jadi false, kalau false jadi true
-                //Collections.reverse(players);
-                //currentPlayer = players.size() - 1;
                 break;
             case "SKIP":
                 if (gameDirection){
@@ -256,12 +216,10 @@ public class Game {
                 }
             case "DRAW_2":
                 drawTwo(1);
-                // nextPlayer(1);
                 break;
             case "DRAW_4":
                 setColor();
                 drawFour(1);
-                // nextPlayer(1);
                 break;
             default :
         }
@@ -327,6 +285,4 @@ public class Game {
     public void prevPlayer(int num){
         currentPlayer = (currentPlayer - num) % players.size();
     }
-
-    
 }

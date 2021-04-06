@@ -1,9 +1,7 @@
-import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Collections;
 
 public class Deck {
-    private SecureRandom rand = new SecureRandom();
     private ArrayList<Card> decks = new ArrayList<>();
     private ArrayList<Card> normaldecks = new ArrayList<>();
     
@@ -22,14 +20,6 @@ public class Deck {
         }
         decks.add(new DrawFour());
         decks.add(new Wild());
-    }
-
-    public Color getOneRandomColor(){
-        return listColor[rand.nextInt((listColor.length))];
-    }
-
-    public Value getOneRandomValue(){
-        return listValue[rand.nextInt((listValue.length))];
     }
 
     public Card getOneNormalCard(){
