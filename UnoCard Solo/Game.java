@@ -3,7 +3,6 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Collections;
-//import java.util.InputMismatchException;
 
 public class Game {
     public int currentPlayer = 0;
@@ -15,6 +14,7 @@ public class Game {
 
     boolean gameDirection = true;
     int multi = 0;
+    int counter2 = 1;
     public static final Deck deckCard = new Deck();
 
     Scanner input = new Scanner(System.in);
@@ -46,6 +46,8 @@ public class Game {
             for (int k = 0; k < 7 ; k++){
                 p.addCard(deckCard.getOneRandomCard());
             }
+            p.addCard(deckCard.a());
+            p.addCard(deckCard.a());
         }
     }
 
@@ -113,7 +115,7 @@ public class Game {
     }
 
     public boolean validMultiDiscard(Card card){
-        return card.getColor() == getLastCardThrown().getColor() && card.getValue() == getLastCardThrown().getValue();
+        return card.getColor() == getLastCardThrown().getColor() && card.getValue() == getLastCardThrown().getValue() || card.getColor() == Color.WILD;
     }
 
     public void isEmptyHand(){
@@ -149,6 +151,7 @@ public class Game {
                     isEmptyHand();
                     //KARTU TINGGAL SATU
                     declareHji();
+                    specialDrawTwo();
                     checkValue(card);  
                 }else{
                     System.out.println("Kartu tidak cocok, coba lagi");
@@ -162,6 +165,7 @@ public class Game {
                     isEmptyHand();
                     //KARTU TINGGAL SATU
                     declareHji();
+                    specialDrawTwo();
                     checkValue(card);  
                 }else{
                     System.out.println("Kartu tidak cocok, coba lagi");
@@ -240,13 +244,26 @@ public class Game {
                     break;
                 }
             case "DRAW_2":
-                drawTwo(1);
+                //drawTwo(1);
                 break;
             case "DRAW_4":
                 setColor();
                 drawFour(1);
                 break;
             default :
+        }
+    }
+
+    public void specialDrawTwo(){
+        if (cardPile.get(cardPile.size()-2).getValue() == Value.DRAW_2 && getLastCardThrown().getValue() == Value.DRAW_2){
+            counter2+=1;
+        }
+        if (cardPile.get(cardPile.size()-2).getValue() == Value.DRAW_2 && getLastCardThrown().getValue() != Value.DRAW_2){
+            draw(currentPlayer, 2*counter2);
+            players.get(currentPlayer).addCard(getLastCardThrown());
+            cardPile.remove(cardPile.size()-1);
+            getLastCardThrown().setValue(Value.NONE);
+            counter2 = 1;
         }
     }
 
@@ -310,5 +327,9 @@ public class Game {
 
     public void prevPlayer(int num){
         currentPlayer = (currentPlayer - num) % players.size();
+        if (currentPlayer==-1){
+            currentPlayer = players.size()-1;
+        }
     }
+
 }

@@ -27,6 +27,10 @@ public class Deck {
         return normaldecks.get(0);
     }
 
+    public Card a (){
+        return new DrawFour();
+    }
+
     public Card getOneRandomCard(){
         Collections.shuffle(decks);
         return decks.get(0);

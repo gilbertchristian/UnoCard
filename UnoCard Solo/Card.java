@@ -19,5 +19,9 @@ public abstract class Card {
         this.color = color;
     }
 
+    public void setValue(Value value){
+        this.value = value;
+    }
+
     public abstract String printCard();
 }
