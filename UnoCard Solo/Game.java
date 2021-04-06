@@ -183,7 +183,6 @@ public class Game {
                     discard();
                 } 
             }
-            
         }else{
             System.out.println("Nomor kartu tidak valid, coba lagi");
             discard();
@@ -240,7 +239,7 @@ public class Game {
             case "REVERSE":
                 gameDirection ^= true; //XOR, kalau true jadi false, kalau false jadi true
                 //Collections.reverse(players);
-                currentPlayer = players.size() - 1;
+                //currentPlayer = players.size() - 1;
                 break;
             case "SKIP":
                 if (gameDirection){
@@ -268,6 +267,13 @@ public class Game {
         }
     }
 
+    public void endOfTurn(){
+        if (gameDirection){
+            nextPlayer(1);
+        }else{
+            prevPlayer(1);
+        }
+    }
     public void setColor(){
         try{
             System.out.println("Silahkan pilih warna");
